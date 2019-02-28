@@ -1,0 +1,9 @@
+{
+  "name": "ToDoList",
+  "description": "A simple To Do list",
+  "namespace": "ToDoList",
+  "author": "Your name",
+  "type": "template",
+  "serviceProvider": "ToDoList\\Providers\\ToDoServiceProvider",
+  "runOnBuild": ["ToDoList\\Migrations\\CreateToDoTable"]
+}

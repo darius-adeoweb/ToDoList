@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>To Do</title>
+
+        <!-- Link main CSS file and additional fonts -->
+        <link href="{{ plugin_path('ToDoList') }}/css/main.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+
+        <!-- Integrate jQuery -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!-- To Do List -->
+        <div class="list">
+            <h1 class="header">Things to do</h1>
+
+            <ul class="tasks">
+                {% if tasks is not null %}
+                    {% for task in tasks %}
+                        <li>
+                            <span class="task {% if task.isDone == 1 %} done {% endif %}">{{ task.taskDescription }}</span>
+                            {% if task.isDone == 1 %}
+                                <button id="{{ task.id }}" class="delete-button">Delete from list</button>
+                            {% else %}
+                                <button id="{{ task.id }}" class="done-button">Mark as done</button>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+
+            <!-- Text field and submit button -->
+            <div class="task-add">
+                <input type="text" name="taskDescription" placeholder="Enter a new task here." class="input" autocomplete="off">
+                <input type="submit" id="addTask" value="Add" class="submit">
+            </div>
+        </div>
+
+        <!-- Enable adding, updating and deleting tasks in the To Do list without reloading the page -->
+        <script src="{{ plugin_path('ToDoList') }}/js/todo.js"></script>
+    </body>
+</html>
