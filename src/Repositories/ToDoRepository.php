@@ -9,6 +9,7 @@ use ToDoList\Models\ToDo;
 use ToDoList\Validators\ToDoValidator;
 use Plenty\Modules\Frontend\Services\AccountService;
 
+
 class ToDoRepository implements ToDoRepositoryContract
 {
     /**
@@ -17,7 +18,7 @@ class ToDoRepository implements ToDoRepositoryContract
     private $accountService;
 
     /**
-     * ToDoRepository constructor.
+     * UserSession constructor.
      * @param AccountService $accountService
      */
     public function __construct(AccountService $accountService)
@@ -49,11 +50,17 @@ class ToDoRepository implements ToDoRepositoryContract
             throw $e;
         }
 
+        /**
+         * @var DataBase $database
+         */
         $database = pluginApp(DataBase::class);
 
         $toDo = pluginApp(ToDo::class);
+
         $toDo->taskDescription = $data['taskDescription'];
+
         $toDo->userId = $this->getCurrentContactId();
+
         $toDo->createdAt = time();
 
         $database->save($toDo);
@@ -61,17 +68,20 @@ class ToDoRepository implements ToDoRepositoryContract
         return $toDo;
     }
 
+    /**
+     * List all items of the To Do list
+     *
+     * @return ToDo[]
+     */
     public function getToDoList(): array
     {
         $database = pluginApp(DataBase::class);
 
         $id = $this->getCurrentContactId();
-
         /**
          * @var ToDo[] $toDoList
          */
         $toDoList = $database->query(ToDo::class)->where('userId', '=', $id)->get();
-
         return $toDoList;
     }
 
@@ -81,7 +91,7 @@ class ToDoRepository implements ToDoRepositoryContract
      * @param int $id
      * @return ToDo
      */
-    public function updateTask(int $id): ToDo
+    public function updateTask($id): ToDo
     {
         /**
          * @var DataBase $database
@@ -105,8 +115,11 @@ class ToDoRepository implements ToDoRepositoryContract
      * @param int $id
      * @return ToDo
      */
-    public function deleteTask(int $id): ToDo
+    public function deleteTask($id): ToDo
     {
+        /**
+         * @var DataBase $database
+         */
         $database = pluginApp(DataBase::class);
 
         $toDoList = $database->query(ToDo::class)

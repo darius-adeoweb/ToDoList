@@ -1,9 +1,16 @@
 {
-  "name": "ToDoList",
-  "description": "A simple To Do list",
-  "namespace": "ToDoList",
-  "author": "Your name",
-  "type": "template",
-  "serviceProvider": "ToDoList\\Providers\\ToDoServiceProvider",
-  "runOnBuild": ["ToDoList\\Migrations\\CreateToDoTable"]
+      "name":"ToDoList",
+      "namespace":"ToDoList",
+      "type":"template",
+      "version":"1.0.1",
+      "license":"AGPL-3.0",
+      "pluginIcon":"icon_plugin_xs.png",
+      "price":0.00,
+      "description":"A simple To Do list that you can use to create tasks, mark tasks as done and delete tasks that are marked as done. If a customer is logged in to the online store, the customer will have a personal To Do list. Customers that are not logged in to the online store will share a common To Do list.",
+      "shortDescription":"A simple To Do list",
+      "keywords":["To Do list","tutorial"],
+      "author":"David Bohla",
+      "authorIcon":"icon_author_xs.png",
+      "serviceProvider":"ToDoList\\Providers\\ToDoServiceProvider",
+      "runOnBuild":["ToDoList\\Migrations\\CreateToDoTable"]
 }

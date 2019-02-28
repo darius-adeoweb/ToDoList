@@ -4,31 +4,24 @@ namespace ToDoList\Models;
 
 use Plenty\Modules\Plugin\DataBase\Contracts\Model;
 
+/**
+ * Class ToDo
+ *
+ * @property int     $id
+ * @property string  $taskDescription
+ * @property int     $userId
+ * @property boolean $isDone
+ * @property int     $createdAt
+ */
 class ToDo extends Model
 {
     /**
      * @var int
      */
     public $id = 0;
-
-    /**
-     * @var string
-     */
     public $taskDescription = '';
-
-    /**
-     * @var int
-     */
     public $userId = 0;
-
-    /**
-     * @var bool
-     */
     public $isDone = false;
-
-    /**
-     * @var int
-     */
     public $createdAt = 0;
 
     /**

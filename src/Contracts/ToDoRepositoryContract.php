@@ -5,7 +5,7 @@ namespace ToDoList\Contracts;
 use ToDoList\Models\ToDo;
 
 /**
- * Interface ToDoRepositoryContract
+ * Class ToDoRepositoryContract
  * @package ToDoList\Contracts
  */
 interface ToDoRepositoryContract
@@ -31,7 +31,7 @@ interface ToDoRepositoryContract
      * @param int $id
      * @return ToDo
      */
-    public function updateTask(int $id): ToDo;
+    public function updateTask($id): ToDo;
 
     /**
      * Delete a task from the To Do list
@@ -39,5 +39,5 @@ interface ToDoRepositoryContract
      * @param int $id
      * @return ToDo
      */
-    public function deleteTask(int $id): ToDo;
+    public function deleteTask($id): ToDo;
 }

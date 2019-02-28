@@ -21,4 +21,5 @@ class ToDoRouteServiceProvider extends RouteServiceProvider
         $router->put('todo/{id}', 'ToDoList\Controllers\ContentController@updateToDo')->where('id', '\d+');
         $router->delete('todo/{id}', 'ToDoList\Controllers\ContentController@deleteToDo')->where('id', '\d+');
     }
+
 }
