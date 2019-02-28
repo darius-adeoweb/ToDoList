@@ -6,6 +6,8 @@ use Plenty\Plugin\Controller;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Templates\Twig;
 use ToDoList\Contracts\ToDoRepositoryContract;
+use Plenty\Plugin\Log\Loggable;
+use Plenty\Plugin\Log\Reportable;
 
 /**
  * Class ContentController
@@ -13,6 +15,8 @@ use ToDoList\Contracts\ToDoRepositoryContract;
  */
 class ContentController extends Controller
 {
+    use Loggable, Reportable;
+
     /**
      * @param Twig                   $twig
      * @param ToDoRepositoryContract $toDoRepo
@@ -33,6 +37,18 @@ class ContentController extends Controller
     public function createToDo(Request $request, ToDoRepositoryContract $toDoRepo): string
     {
         $newToDo = $toDoRepo->createTask($request->all());
+
+        $this->getLogger('ContentController_createToDo')
+            ->setReferenceType('toDoId')
+            ->setReferenceValue($newToDo->id)
+            ->info('ToDoList::migration.createToDoInformation', ['userId' => $newToDo->userId]);
+
+        $this->report('ContentController_createToDo',
+            'ToDoList::migration.createToDoInformation',
+            ['userId' => $newToDo->id],
+            ['toDoId' => $newToDo->id]
+        );
+
         return json_encode($newToDo);
     }
 
